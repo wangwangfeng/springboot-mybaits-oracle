@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zfsoft.apache.mapper.TestMapper">
+    <resultMap id="BaseResultMap" type="com.zfsoft.apache.pojo.Test">
+        <!--@Table WEB_XIZANG.TEST-->
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="XM" jdbcType="VARCHAR" property="xm"/>
+        <result column="AGE" jdbcType="VARCHAR" property="age"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID, XM, AGE
+    </sql>
+    <select id="getById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from WEB_XIZANG.TEST
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>

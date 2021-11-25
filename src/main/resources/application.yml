@@ -1,0 +1,61 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 300000
+      max-lifetime: 1800000
+    dynamic:
+      primary: ds1
+      datasource:
+        ds1:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/aq-elms?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+          username: root
+          password: 123456
+          hikari:
+            validation-query: select 1 FROM
+        ds2:
+          driver-class-name: oracle.jdbc.OracleDriver
+          url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
+          username: WEB_XIZANG
+          password: WEB_XIZANG
+          hikari:
+            validation-query: select 1 FROM DUAL
+        ds3:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://59.203.218.244:3307/kettle_t_yu?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+          username: root
+          password: Aqtest@123
+          hikari:
+            validation-query: select 1
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.zfsoft.certificate.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+
+logging:
+  config: classpath:logback-spring.xml
+
+#swagger相关配置
+# http://localhost:8080/swagger-ui.html
+#swagger:
+#  enabled: true
+#  title: Springboot-Mybatisplus-多数据源
+#  description: 不动产制证项目
+#  base-package: com.zfsoft.apache.controller
+#  exclude-path: /error/**
+tools:
+  doc:
+    enable: true
+    base-package: com.zfsoft.apache.controller
+    title: Springboot-Mybatisplus-多数据源
+    description: 不动产制证项目
